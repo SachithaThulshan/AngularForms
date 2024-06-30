@@ -151,9 +151,9 @@
           <input type="text" class="form-control" #skills (keyup.enter)="addskills(skills)">
 
           <ul class="list-group">
-            <li class="list-group-item" *ngFor="let skill of Skills.controls">
+            <li class="list-group-item" *ngFor="let skill of Skills.controls; let i = index">
               {{skill.value}}
-<!--              <a class="btn btn-sm btn-danger" (click)="removeSkill()">x</a>-->
+              <a class="btn btn-sm btn-danger" (click)="removeSkill(i)">x</a>
             </li>
           </ul>
 

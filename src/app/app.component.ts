@@ -75,7 +75,7 @@ get Skills(){
     console.log(this.form.value);
   }
 
-  // removeSkill(index: any) {
-  //   this.Skills.removeAt(index);
-  // }
+  removeSkill(index: any) {
+    this.Skills.removeAt(index);
+  }
 }
