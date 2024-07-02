@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormArray, NgForm, NgModel, Validators} from "@angular/forms";
+import {FormArray, NgForm, NgModel, Validators, FormBuilder} from "@angular/forms";
 import {FormGroup, FormControl} from "@angular/forms";
 
 @Component({
@@ -12,30 +12,55 @@ export class AppComponent {
   // emailRegex:string = "[a-z0-9._%+\\-]+@[a-z0-9.\\-]+\\.[a-z]{2,}$";
   contactRegix:string = "[0-9]{10}"
 
-  constructor() {
-    this.form =new FormGroup({
-      fullName: new FormControl('',[
+  constructor(fb : FormBuilder) {
+    //Easy Way and Clean
+    this.form = fb.group({
+      fullName: ['',[
         Validators.required,
         Validators.minLength(5)
-      ]),
-      email: new FormControl('',[
-        Validators.required,
-        // Validators.pattern(this.emailRegex)
-        Validators.email
-      ]),
+      ]],
 
-      contactDetails:new FormGroup({
-        address: new FormControl('',[Validators.required]),
-        shippingAddress: new FormControl('',[Validators.required]),
-        contactNo: new FormControl('',[
+      email: ['', [
+        Validators.required,
+        Validators.email
+      ]],
+
+      contactDetails:fb.group({
+        address:['',Validators.required],
+        shippingAddress:['',Validators.required],
+        contactNo:['',[
           Validators.required,
           Validators.pattern(this.contactRegix)
-        ])
+        ]]
       }),
 
-      skills: new FormArray([])
+      skills:fb.array([])
+    })
 
-    });
+
+    // this.form =new FormGroup({
+    //   fullName: new FormControl('',[
+    //     Validators.required,
+    //     Validators.minLength(5)
+    //   ]),
+    //   email: new FormControl('',[
+    //     Validators.required,
+    //     // Validators.pattern(this.emailRegex)
+    //     Validators.email
+    //   ]),
+    //
+    //   contactDetails:new FormGroup({
+    //     address: new FormControl('',[Validators.required]),
+    //     shippingAddress: new FormControl('',[Validators.required]),
+    //     contactNo: new FormControl('',[
+    //       Validators.required,
+    //       Validators.pattern(this.contactRegix)
+    //     ])
+    //   }),
+    //
+    //   skills: new FormArray([])
+    //
+    // });
   }
 
   // get Address(){
